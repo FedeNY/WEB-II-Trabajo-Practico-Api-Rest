@@ -30,13 +30,13 @@ DNI: 41.675.964</p>
 <p><b>Endpoint:</b><br>
 /product</p>
 
-<h3>Obtener Productos ordenados de forma ascendente o descendente:</h3>
+`Obtener Productos ordenados de forma ascendente o descendente:`
 <p>Se le puede especificar de qué forma debe devolver los productos, ya sea ascendente o descendente.</p>
 <p><b>Ejemplo:</b><br>
 /product?order=asc<br>
 /product?order=desc</p>
 
-<h3>Filtrar productos por marca:</h3>
+`Filtrar productos por marca:`
 <p>Obtiene un listado de los productos de la DB filtrados por la marca. Los devuelve de la misma forma que con "/product" pero de una marca específica.</p>
 <p><b>Ejemplo:</b><br>
 /product?brand=(nombre de la marca ej: motorola)</p>
@@ -70,7 +70,7 @@ DNI: 41.675.964</p>
 }</code>
 </pre>
 
-<h4>Requerimientos válidos de cada campo:</h4>
+<h3>Requerimientos válidos de cada campo:</h3>
 <p>Cualquier campo que no sea válido o esté vacío recibirá como resultado un error 400.</p>
 <ul>
     <li><b>img:</b> dato de tipo <code>varchar</code> con una capacidad de 250 caracteres. El valor esperado de esta propiedad es la URL de una imagen copiada de internet.</li>
@@ -114,7 +114,7 @@ Antes de modificar un producto, primero obténgalo con una solicitud GET de todo
   "quota": "12"
 }</code>
 </pre>
-<ul>
+<ul><b>Importante:</b>
     <li>La propiedad <b>"id"</b> no debe ser modificada, ya que es un identificador que la misma DB utiliza para poder actualizar el producto buscándolo en la misma.</li>
     <li>La propiedad <b>"offer_price"</b> no debe ser modificada. Al realizarse la solicitud de actualización, se vuelve a calcular el valor a partir del <code>price</code> y <code>offer</code> que se le asignen.</li>
 </ul>
@@ -137,7 +137,7 @@ Antes de modificar un producto, primero obténgalo con una solicitud GET de todo
 <p>Agrega una nueva categoría siempre que esa categoría no exista ya en la DB. El valor de la marca es pasado por el body del JSON.</p>
 <p><b>Endpoint:</b><br>
 /category</p>
-<p><b>Ejemplo:</b></p>
+<p><b>Ejemplo:</b></p><br>
 <pre>
 <code>{
   "brand":"motorola"
@@ -148,8 +148,8 @@ Antes de modificar un producto, primero obténgalo con una solicitud GET de todo
 <h3>Borrar Categorias (DELETE):</h3>
 <p>Borra la marca proporcionada por el parámetro de la solicitud. Antes de proceder, se verifica que la marca sea correcta.</p>
 <p><b>Endpoint:</b><br>
-/category/:brand<br>
-<b>Ejemplo:</b><br>
+/product/:brand</p>
+<p><b>Ejemplo:</b><br>
 /category/motorola</p>
 <p><b>Importante:</b> Se recomienda antes hacer una solicitud GET "Obtener todas las categorias" para saber cuál marca desea borrar. Solo se eliminarán las marcas que no contengan ningún producto asociado.</p>
 
