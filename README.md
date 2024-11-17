@@ -23,6 +23,8 @@ DNI: 41.675.964</p>
 
 <h2>End Points</h2>
 
+<h2>Productos</h2>
+
 <h3>Obtener Productos (GET):</h3>
 <p>Obtiene un listado de todos los productos de la DB ordenados por el precio final (calculo resultado de la oferta y el precio base) ordenado defecto de forma ascendente.</p>
 <p><b>Endpoint:</b><br>
@@ -39,14 +41,14 @@ DNI: 41.675.964</p>
 <p><b>Ejemplo:</b><br>
 /product?brand=(nombre de la marca ej: motorola)</p>
 
-<h3>Obtener un producto por ID:</h3>
+<h3>Obtener un Producto por ID:</h3>
 <p>Obtiene un solo producto especificado por el parámetro en base a su ID.</p>
 <p><b>Endpoint:</b><br>
 /product/:id<br>
 <b>Ejemplo:</b><br>
 /product/1</p>
 
-<h3>Agregar un nuevo producto (POST):</h3>
+<h3>Agregar un nuevo Producto (POST):</h3>
 <p>Crea un producto en la base de datos si los datos proporcionados cumplen con las condiciones de las propiedades.</p>
 <p><b>Endpoint:</b><br>
 /product</p>
@@ -68,7 +70,7 @@ DNI: 41.675.964</p>
 }</code>
 </pre>
 
-<h3>Requerimientos válidos de cada campo:</h3>
+<h4>Requerimientos válidos de cada campo:</h4>
 <p>Cualquier campo que no sea válido o esté vacío recibirá como resultado un error 400.</p>
 <ul>
     <li><b>img:</b> dato de tipo <code>varchar</code> con una capacidad de 250 caracteres. El valor esperado de esta propiedad es la URL de una imagen copiada de internet.</li>
@@ -85,7 +87,7 @@ DNI: 41.675.964</p>
     <li><b>quota:</b> dato de tipo <code>int</code>. El valor esperado es un valor numérico comprendido entre una de las siguientes opciones: 0 (sin cuotas sin interés), 6 (6 cuotas sin interés), 12 (12 cuotas sin interés).</li>
 </ul>
 
-<h3>Actualizar un producto (PUT):</h3>
+<h3>Actualizar un Producto (PUT):</h3>
 <p>Actualiza un producto proporcionando su ID por params. Si la ID no existe en la DB, recibirá un 404 indicando que el producto que quiere modificar no existe.</p>
 <p><b>Endpoint:</b><br>
 /product/:id<br>
@@ -109,10 +111,51 @@ Antes de modificar un producto, primero obténgalo con una solicitud GET de todo
   "offer": "50",
   "offer_price": "0",
   "stock": "0",
-  "quota": "612"
+  "quota": "12"
 }</code>
 </pre>
 <ul>
     <li>La propiedad <b>"id"</b> no debe ser modificada, ya que es un identificador que la misma DB utiliza para poder actualizar el producto buscándolo en la misma.</li>
     <li>La propiedad <b>"offer_price"</b> no debe ser modificada. Al realizarse la solicitud de actualización, se vuelve a calcular el valor a partir del <code>price</code> y <code>offer</code> que se le asignen.</li>
 </ul>
+
+<h3>Eliminar un producto (DELETE):</h3>
+<p>Elimina un producto de la DB según la ID proporcionada. Si la ID no existe, recibirá un error en la solicitud. Si se realizó correctamente, recibirá un estatus 200 informando que la acción fue ejecutada con éxito.</p>
+<p><b>Endpoint:</b><br>
+/product/:id</p>
+<p><b>Ejemplo:</b><br>
+/product/1</p>
+
+<h2>Categorias</h2>
+
+<h3>Obtener todas las Categorias (GET):</h3>
+<p>Obtiene un listado de todas las categorías ordenadas por ID.</p>
+<p><b>Endpoint:</b><br>
+/category</p>
+
+<h3>Agregar una nueva Categoria (POST):</h3>
+<p>Agrega una nueva categoría siempre que esa categoría no exista ya en la DB. El valor de la marca es pasado por el body del JSON.</p>
+<p><b>Endpoint:</b><br>
+/category</p>
+<p><b>Ejemplo:</b></p>
+<pre>
+<code>{
+  "brand":"motorola"
+}</code>
+</pre>
+<p><b>Importante:</b> brand es una propiedad tipo <code>varchar</code> con una capacidad de 60 caracteres. La marca enviada siempre va a ser en minúscula independientemente de cómo fue escrito por el usuario.</p>
+
+<h3>Borrar Categorias (DELETE):</h3>
+<p>Borra la marca proporcionada por el parámetro de la solicitud. Antes de proceder, se verifica que la marca sea correcta.</p>
+<p><b>Endpoint:</b><br>
+/category/:brand<br>
+<b>Ejemplo:</b><br>
+/category/motorola</p>
+<p><b>Importante:</b> Se recomienda antes hacer una solicitud GET "Obtener todas las categorias" para saber cuál marca desea borrar. Solo se eliminarán las marcas que no contengan ningún producto asociado.</p>
+
+
+
+
+
+
+
