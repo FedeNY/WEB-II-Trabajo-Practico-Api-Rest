@@ -63,7 +63,7 @@ DNI: 41.675.964</p>
   "screen": "6.5",
   "id_brand": "1",
   "gamma": "high",
-  "price": "150000",
+  "price": "100",
   "offer": "50",
   "stock": "1",
   "quota": "12"
@@ -107,9 +107,9 @@ Antes de modificar un producto, primero obténgalo con una solicitud GET de todo
   "screen": "6.5",
   "id_brand": "11",
   "gamma": "high",
-  "price": "70000",
+  "price": "5000",
   "offer": "50",
-  "offer_price": "0",
+  "offer_price": "2500",
   "stock": "0",
   "quota": "12"
 }</code>
